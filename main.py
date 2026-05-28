@@ -81,19 +81,19 @@ for file_path in files:
             image[y:y + h, x:x + w] = blur
 
             save = os.path.join(output, file_name)
-            cv2.imencode(save, image)
+            cv2.imencode(os.path.splitext(save)[1], image)[1].tofile(save)
             print(f"Выполнена обработка: номер {res} обработан")
 
         else:
             new_name = "Не_Распознано_" + file_name
             save = os.path.join(output, new_name)
-            cv2.imencode(save, image)
+            cv2.imencode(os.path.splitext(save)[1], image)[1].tofile(save)
             print(f"Не удалось распознать номер в {file_name}.\n"
                   f"Изображение было сохранено как {new_name}\n")
     else:
         new_name = "Не_Найдено_" + file_name
         save = os.path.join(output, new_name)
-        cv2.imencode(save, image)
+        cv2.imencode(os.path.splitext(save)[1], image)[1].tofile(save)
         print(f"Не удалось найти номер в {file_name}.\n"
               f"Изображение было сохранено как {new_name}\n")
 
